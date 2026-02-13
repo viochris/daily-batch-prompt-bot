@@ -15,7 +15,13 @@ Unlike the standard version which generates one prompt at a time, this bot lever
 This project is designed to act as the **High-Volume Producer** for the **[Automated Image Pipeline](https://github.com/viochris/automated-image-pipeline)**.
 * **Producer (This Bot):** Generates *multiple* ideas at once and bulk-fills the spreadsheet.
 * **Consumer (Image Bot):** Reads from the same spreadsheet row-by-row, generates the art, and posts it to Telegram.
-* **Flexible Scheduling:** You can run this bot once a day (e.g., at 06:00) to provide enough "fuel" for the Image Bot to run multiple times throughout the day (e.g., at 09:00, 12:00, 18:00).
+* **Flexible Scheduling:** You can run them as a single monolithic flow or schedule them sequentially (e.g., Prompt Gen at 06:00, Image Gen at 06:10) to ensure your content queue never runs dry.
+
+### ⚡ Single-Prompt Variant
+Don't need a high volume? Check out the **[Standard Prompt Generator](https://github.com/viochris/daily-prompt-generator-bot)**.
+* **Standard Efficiency:** Focuses on generating **1 unique prompt** with maximum detail per API call.
+* **Direct Output:** No complex parsing needed. The raw AI text is validated and sent directly to the database.
+* **Simple Insert:** Uses `gspread`'s `append_row` for a lightweight and reliable database update.
 
 ### ⚡ Single-Prompt Variant
 Don't need a high volume? Check out the **[Standard Prompt Generator](https://github.com/viochris/daily-prompt-generator-bot)**.
