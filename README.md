@@ -67,7 +67,7 @@ GOOGLE_API_KEY=your_gemini_api_key
 
 1. **Clone the Repository**
 ```bash
-git clone [https://github.com/viochris/daily-batch-prompt-bot.git](https://github.com/viochris/daily-batch-prompt-bot.git)
+git clone https://github.com/viochris/daily-batch-prompt-bot.git
 cd daily-batch-prompt-bot
 ```
 
