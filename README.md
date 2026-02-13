@@ -23,12 +23,6 @@ Don't need a high volume? Check out the **[Standard Prompt Generator](https://gi
 * **Direct Output:** No complex parsing needed. The raw AI text is validated and sent directly to the database.
 * **Simple Insert:** Uses `gspread`'s `append_row` for a lightweight and reliable database update.
 
-### ⚡ Single-Prompt Variant
-Don't need a high volume? Check out the **[Standard Prompt Generator](https://github.com/viochris/daily-prompt-generator-bot)**.
-* **Standard Efficiency:** Focuses on generating **1 unique prompt** with maximum detail per API call.
-* **Direct Output:** No complex parsing needed. The raw AI text is validated and sent directly to the database.
-* **Simple Insert:** Uses `gspread`'s `append_row` for a lightweight and reliable database update.
-
 ## ✨ Key Features
 ### 🧠 Batch AI Engineering
 * **3-in-1 Generation:** Maximizes API efficiency by instructing Gemini to output **3 unique prompts** in one response, separated by double newlines.
