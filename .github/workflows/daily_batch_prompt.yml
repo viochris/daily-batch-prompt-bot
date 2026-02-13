@@ -1,0 +1,50 @@
+name: Daily Batch Prompt Generator
+
+# TRIGGER: When should this workflow run?
+on:
+  schedule:
+    # Cron Format: 'Minute Hour * * *' (UTC Time)
+    # Runs at 23:00 UTC (06:00 AM WIB) to fill the queue before the day starts.
+    - cron: '0 23 * * *'
+  
+  # Allows you to run this workflow manually from the Actions tab (for testing)
+  workflow_dispatch:
+
+# JOBS: What tasks to execute?
+jobs:
+  run-batch-prompt-bot:
+    runs-on: ubuntu-latest # Uses a standard Ubuntu runner provided by GitHub
+    
+    steps:
+      # 1. Checkout repository code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        
+      # 2. Set up Python environment
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11' # Ensure this matches your local Python version
+          
+      # 3. Install required libraries
+      - name: Install Dependencies
+        run: |
+          pip install --upgrade pip
+          # Installing specific libraries used in auto-multiple-prompt-generate.py
+          pip install prefect gspread python-dotenv google-genai
+        
+      # 4. CREATE JSON KEY FILE (IMPORTANT)
+      # We store the CONTENT of the JSON file in a GitHub Secret named 'GCP_SA_KEY'.
+      # This step creates the physical file on the server so gspread can find it.
+      - name: Create Google Credentials File
+        run: echo '${{ secrets.GCP_SA_KEY }}' > chatbot_key.json
+
+      # 5. RUN THE SCRIPT
+      # We inject the secrets (API Keys) securely into the environment here
+      - name: Run Batch Prompt Script
+        env:
+          # These must match os.getenv("...") in your Python script
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        
+        # Make sure the filename matches your python script exactly
+        run: python auto-multiple-prompt-generate.py
